@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
@@ -53,6 +54,10 @@ void main() {
         },
       );
 
+      tearDown(() {
+        showHttpErrors = true;
+      });
+
       Future<void> mockGet({
         required String path,
         required int statusCode,
@@ -103,14 +108,25 @@ void main() {
       test(
         'signIn > createRequestToken > fail',
         () async {
-          mockGet(
-            path: '/authentication/token/new?api_key=apiKey&language=en',
-            statusCode: 401,
-            reponse: {
-              'status_message': '',
-              'success': false,
-              'status_code': 7,
-            },
+          // mockGet(
+          //   path: '/authentication/token/new?api_key=apiKey&language=en',
+          //   statusCode: 401,
+          //   reponse: {
+          //     'status_message': '',
+          //     'success': false,
+          //     'status_code': 7,
+          //   },
+          // );
+
+          showHttpErrors = false;
+
+          when(
+            client.get(
+              any,
+              headers: anyNamed('headers'),
+            ),
+          ).thenThrow(
+            const SocketException('fake error'),
           );
 
           final result = await repository.signIn(
@@ -119,7 +135,7 @@ void main() {
           );
           expect(
             result.value,
-            isA<SignInFailure>(),
+            isA<SignInFailureNetwork>(),
           );
         },
       );
@@ -144,7 +160,7 @@ void main() {
             response: {
               'status_message': '',
               'success': false,
-              'status_code': 7,
+              'status_code': 32,
             },
           );
 
@@ -227,13 +243,17 @@ void main() {
             },
           );
 
-          final futureGetUserData = mockGet(
-            path: '/account?session_id=sessionId&api_key=apiKey&language=en',
-            statusCode: 401,
-            reponse: {
-              'status_code': 3,
-              'status_message': '',
-            },
+          showHttpErrors = false;
+
+          when(
+            client.get(
+              Uri.parse(
+                '/account?session_id=sessionId&api_key=apiKey&language=en',
+              ),
+              headers: anyNamed('headers'),
+            ),
+          ).thenThrow(
+            const SocketException('mocked error'),
           );
 
           final futureCreateSessionWithLogin = mockPost(
@@ -261,7 +281,6 @@ void main() {
             'password',
           );
 
-          await futureGetUserData;
           await futureCreateSessionWithLogin;
           await futureCreateSession;
 

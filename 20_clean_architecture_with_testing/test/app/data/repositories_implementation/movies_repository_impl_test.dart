@@ -34,6 +34,9 @@ void main() {
           );
         },
       );
+      tearDown(
+        () => showHttpErrors = true,
+      );
 
       void mockGet({
         required int statusCode,
@@ -91,17 +94,19 @@ void main() {
       test(
         'getMovieById > fail',
         () async {
-          mockGet(
-            statusCode: 404,
-            response: {
-              'status_message': '.',
-              'status_code': 34,
-            },
+          showHttpErrors = false;
+          when(
+            client.get(
+              any,
+              headers: anyNamed('headers'),
+            ),
+          ).thenThrow(
+            ClientException('message'),
           );
           final result = await repository.getMovieById(123);
           expect(
             result.value,
-            isA<HttpRequestFailureNotFound>(),
+            isA<HttpRequestFailureNetwork>(),
           );
         },
       );
