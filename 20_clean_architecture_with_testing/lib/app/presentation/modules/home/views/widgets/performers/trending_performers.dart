@@ -26,6 +26,7 @@ class _TrendingPerformersState extends State<TrendingPerformers> {
   Widget build(BuildContext context) {
     final HomeController controller = context.watch();
     final performers = controller.state.performers;
+
     return Expanded(
       child: performers.when(
         loading: () => const Center(

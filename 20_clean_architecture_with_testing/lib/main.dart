@@ -19,6 +19,7 @@ import 'app/presentation/global/controllers/favorites/favorites_controller.dart'
 import 'app/presentation/global/controllers/favorites/state/favorites_state.dart';
 import 'app/presentation/global/controllers/session_controller.dart';
 import 'app/presentation/global/controllers/theme_controller.dart';
+import 'app/presentation/routes/routes.dart';
 
 void main() async {
   setPathUrlStrategy();
@@ -45,7 +46,22 @@ void main() async {
   );
 
   runApp(
-    MultiProvider(
+    const Root(),
+  );
+}
+
+class Root extends StatelessWidget {
+  const Root({
+    super.key,
+    this.initialRoute = Routes.splash,
+    this.appRoutes,
+  });
+  final String initialRoute;
+  final Map<String, WidgetBuilder>? appRoutes;
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeController>(
           create: (context) {
@@ -70,8 +86,11 @@ void main() async {
         ),
       ],
       child: TranslationProvider(
-        child: const MyApp(),
+        child: MyApp(
+          initialRoute: initialRoute,
+          appRoutes: appRoutes,
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

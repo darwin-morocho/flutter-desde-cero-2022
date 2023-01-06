@@ -15,12 +15,12 @@ class HomeController extends StateNotifier<HomeState> {
     await loadPerformers();
   }
 
-  void onTimeWindowChanged(TimeWindow timeWindow) {
+  Future<void> onTimeWindowChanged(TimeWindow timeWindow) async {
     if (state.moviesAndSeries.timeWindow != timeWindow) {
       state = state.copyWith(
         moviesAndSeries: MoviesAndSeriesState.loading(timeWindow),
       );
-      loadMoviesAndSeries();
+      await loadMoviesAndSeries();
     }
   }
 

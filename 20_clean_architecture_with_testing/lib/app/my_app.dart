@@ -9,10 +9,15 @@ import 'inject_repositories.dart';
 import 'presentation/global/controllers/theme_controller.dart';
 import 'presentation/global/theme.dart';
 import 'presentation/routes/app_routes.dart';
-import 'presentation/routes/routes.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    required this.initialRoute,
+    this.appRoutes,
+  });
+  final String initialRoute;
+  final Map<String, WidgetBuilder>? appRoutes;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -53,8 +58,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: MaterialApp(
-        initialRoute: Routes.splash,
-        routes: appRoutes,
+        initialRoute: widget.initialRoute,
+        routes: widget.appRoutes ?? appRoutes,
         theme: getTheme(themeController.darkMode),
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,

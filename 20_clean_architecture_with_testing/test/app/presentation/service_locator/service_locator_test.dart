@@ -36,13 +36,13 @@ void main() {
         tag: 'name2',
       );
       final user = ServiceLocator.instance.put(
-        User('Lulu'),
+        IUser('Lulu'),
       );
 
       final name = ServiceLocator.instance.find<String>(
         tag: 'name2',
       );
-      expect(ServiceLocator.instance.find<User>(), user);
+      expect(ServiceLocator.instance.find<IUser>(), user);
 
       expect(
         ServiceLocator.instance.find<String>(),
@@ -53,8 +53,8 @@ void main() {
   );
 }
 
-class User {
+class IUser {
   final String name;
 
-  User(this.name);
+  IUser(this.name);
 }

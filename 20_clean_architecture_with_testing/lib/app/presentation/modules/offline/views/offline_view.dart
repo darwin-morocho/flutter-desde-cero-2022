@@ -17,7 +17,14 @@ class _OfflineViewState extends State<OfflineView> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        _init();
+      },
+    );
+  }
 
+  void _init() {
     _subscription = Repositories.connectivity.onInternetChanged.listen(
       (connected) {
         if (connected) {

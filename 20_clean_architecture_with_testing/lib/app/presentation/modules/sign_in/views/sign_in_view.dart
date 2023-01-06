@@ -36,6 +36,7 @@ class SignInView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextFormField(
+                          key: const Key('input-username'),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (text) {
                             controller.onUsernameChanged(text);
@@ -53,6 +54,7 @@ class SignInView extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          key: const Key('input-password'),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (text) {
                             controller.onPasswordChanged(text);
