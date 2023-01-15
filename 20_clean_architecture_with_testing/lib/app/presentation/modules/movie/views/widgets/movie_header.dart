@@ -1,9 +1,9 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../domain/models/movie/movie.dart';
 import '../../../../global/extensions/build_context_ext.dart';
 import '../../../../global/utils/get_image_url.dart';
+import '../../../../global/widgets/network_image.dart';
 
 class MovieHeader extends StatelessWidget {
   const MovieHeader({super.key, required this.movie});
@@ -16,8 +16,8 @@ class MovieHeader extends StatelessWidget {
         AspectRatio(
           aspectRatio: 16 / 13,
           child: movie.backdropPath != null
-              ? ExtendedImage.network(
-                  getImageUrl(
+              ? MyNetworkImage(
+                  url: getImageUrl(
                     movie.backdropPath!,
                     imageQuality: ImageQuality.original,
                   ),
@@ -95,6 +95,7 @@ class MovieHeader extends StatelessWidget {
                       width: 70,
                       height: 70,
                       child: CircularProgressIndicator(
+                        key: const Key('vote-average'),
                         value: (movie.voteAverage / 10).clamp(0.0, 1.0),
                       ),
                     ),

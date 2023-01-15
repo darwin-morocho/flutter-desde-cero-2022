@@ -40,9 +40,11 @@ class _FavoritesViewState extends State<FavoritesView>
         tabController: _tabController,
       ),
       body: controller.state.map(
-        loading: (_) => const Center(
-          child: CircularProgressIndicator(),
-        ),
+        loading: (_) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
         failed: (_) => RequestFailed(
           onRetry: () => controller.init(),
         ),

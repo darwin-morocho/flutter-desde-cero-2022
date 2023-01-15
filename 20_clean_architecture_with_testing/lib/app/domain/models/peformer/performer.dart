@@ -6,7 +6,7 @@ import '../media/media.dart';
 part 'performer.freezed.dart';
 part 'performer.g.dart';
 
-@freezed
+@Freezed(toJson: false)
 class Performer with _$Performer {
   factory Performer({
     required int id,

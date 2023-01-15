@@ -1,4 +1,3 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../domain/either/either.dart';
@@ -7,6 +6,7 @@ import '../../../../../domain/models/peformer/performer.dart';
 import '../../../../../inject_repositories.dart';
 import '../../../../global/extensions/build_context_ext.dart';
 import '../../../../global/utils/get_image_url.dart';
+import '../../../../global/widgets/network_image.dart';
 import '../../../../global/widgets/request_failed.dart';
 
 class MovieCast extends StatefulWidget {
@@ -40,16 +40,22 @@ class _MovieCastState extends State<MovieCast> {
       builder: (_, snapshot) {
         if (!snapshot.hasData) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              key: Key('cast-loading'),
+            ),
           );
         }
         return snapshot.data!.when(
-          left: (_) => RequestFailed(
-            onRetry: () {
-              setState(() {
-                _initFuture();
-              });
-            },
+          left: (_) => SizedBox(
+            height: 300,
+            child: RequestFailed(
+              key: const Key('movie-cast-request-failed'),
+              onRetry: () {
+                setState(() {
+                  _initFuture();
+                });
+              },
+            ),
           ),
           right: (cast) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +85,8 @@ class _MovieCastState extends State<MovieCast> {
                               final size = constraints.maxHeight;
                               return ClipRRect(
                                 borderRadius: BorderRadius.circular(size / 2),
-                                child: ExtendedImage.network(
-                                  getImageUrl(performer.profilePath),
+                                child: MyNetworkImage(
+                                  url: getImageUrl(performer.profilePath),
                                   height: size,
                                   width: size,
                                   fit: BoxFit.cover,

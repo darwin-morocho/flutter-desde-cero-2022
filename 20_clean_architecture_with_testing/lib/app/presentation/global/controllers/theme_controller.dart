@@ -12,9 +12,9 @@ class ThemeController extends ChangeNotifier {
   bool _darkMode;
   bool get darkMode => _darkMode;
 
-  void onChanged(bool darkMode) {
+  Future<void> onChanged(bool darkMode) async {
     _darkMode = darkMode;
-    preferencesRepository.setDarkMode(_darkMode);
+    await preferencesRepository.setDarkMode(_darkMode);
     notifyListeners();
   }
 }

@@ -95,7 +95,7 @@ Future<void> injectRepositories({
 }
 
 class Repositories {
-  Repositories._();
+  Repositories._(); // coverage:ignore-line
 
   static AccountRepository get account => ServiceLocator.instance.find();
 

@@ -33,6 +33,7 @@ class TrendingTimeWindow extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: DropdownButton<TimeWindow>(
+                  key: const Key('dropdown-time-window'),
                   value: timeWindow,
                   isDense: true,
                   underline: const SizedBox(),

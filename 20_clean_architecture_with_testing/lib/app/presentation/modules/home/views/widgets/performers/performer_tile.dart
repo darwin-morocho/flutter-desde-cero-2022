@@ -1,8 +1,8 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../domain/models/peformer/performer.dart';
 import '../../../../../global/utils/get_image_url.dart';
+import '../../../../../global/widgets/network_image.dart';
 import '../movies_and_series/trending_tile.dart';
 
 class PerformerTile extends StatelessWidget {
@@ -21,8 +21,8 @@ class PerformerTile extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
-              child: ExtendedImage.network(
-                getImageUrl(
+              child: MyNetworkImage(
+                url: getImageUrl(
                   performer.profilePath,
                   imageQuality: ImageQuality.original,
                 ),

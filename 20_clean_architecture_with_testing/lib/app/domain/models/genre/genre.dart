@@ -5,7 +5,7 @@ import '../../typedefs.dart';
 part 'genre.freezed.dart';
 part 'genre.g.dart';
 
-@freezed
+@Freezed(toJson: false)
 class Genre with _$Genre {
   factory Genre({
     required int id,

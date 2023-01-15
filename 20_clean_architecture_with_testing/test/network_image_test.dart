@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tv/app/presentation/global/widgets/network_image.dart';
 
 void main() {
   testWidgets(
@@ -38,14 +38,14 @@ class _CounterViewState extends State<CounterView> {
   int counter = 0;
   @override
   Widget build(BuildContext context) {
+    NetworkImage;
     return Scaffold(
       body: Center(
         child: Column(
           children: [
-            CachedNetworkImage(
-              imageUrl:
+            const MyNetworkImage(
+              url:
                   'https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/55QHEOQRQBEPTF5LRJK57MDEP4.jpg',
-              placeholder: (_, __) => const CircularProgressIndicator(),
             ),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),

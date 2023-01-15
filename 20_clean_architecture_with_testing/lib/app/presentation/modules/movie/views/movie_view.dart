@@ -30,7 +30,9 @@ class MovieView extends StatelessWidget {
           appBar: const MovieAppBar(),
           body: controller.state.map(
             loading: (_) => const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                key: Key('movie-loading'),
+              ),
             ),
             failed: (_) => RequestFailed(
               onRetry: () => controller.init(),

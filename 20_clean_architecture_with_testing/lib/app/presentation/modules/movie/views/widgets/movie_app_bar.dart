@@ -23,6 +23,7 @@ class MovieAppBar extends StatelessWidget with PreferredSizeWidget {
           favoritesController.state.maybeMap(
             orElse: () => const SizedBox(),
             loaded: (favoritesState) => IconButton(
+              key: const Key('favorite-button'),
               onPressed: () => markAsFavorite(
                 context: context,
                 media: movieState.movie.toMedia(),

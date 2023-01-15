@@ -21,6 +21,7 @@ import 'app/presentation/global/controllers/session_controller.dart';
 import 'app/presentation/global/controllers/theme_controller.dart';
 import 'app/presentation/routes/routes.dart';
 
+// coverage:ignore-start
 void main() async {
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +50,7 @@ void main() async {
     const Root(),
   );
 }
+// coverage:ignore-end
 
 class Root extends StatelessWidget {
   const Root({

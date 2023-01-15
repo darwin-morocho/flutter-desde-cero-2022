@@ -12,7 +12,7 @@ enum MediaType {
   tv,
 }
 
-@freezed
+@Freezed(toJson: false)
 class Media with _$Media {
   factory Media({
     required int id,

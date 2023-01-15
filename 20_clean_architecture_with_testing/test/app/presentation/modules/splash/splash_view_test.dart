@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv/app/domain/either/either.dart';
-import 'package:tv/app/domain/models/user/user.dart';
 import 'package:tv/app/inject_repositories.dart';
 import 'package:tv/app/presentation/modules/splash/views/splash_view.dart';
 import 'package:tv/app/presentation/routes/app_routes.dart';
@@ -11,6 +10,7 @@ import 'package:tv/main.dart';
 
 import '../../../../inject_test_repositories.dart';
 import '../../../../mocks.mocks.dart';
+import '../../utils/stubs/stubs_signed_in.dart';
 
 void main() {
   setUp(
@@ -84,16 +84,7 @@ void main() {
   testWidgets(
     'SplashView > hasInternet > isSignedIn > home',
     (tester) async {
-      when(Repositories.connectivity.hasInternet).thenReturn(true);
-      when(Repositories.authentication.isSignedIn).thenAnswer(
-        (_) async => true,
-      );
-      when(Repositories.account.getUserData()).thenAnswer(
-        (_) async => const User(
-          id: 123,
-          username: 'username',
-        ),
-      );
+      stubsSignedIn();
       when(
         (Repositories.account as MockAccountRepository).getFavorites(any),
       ).thenAnswer(

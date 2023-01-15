@@ -2,6 +2,7 @@ import 'package:mockito/mockito.dart';
 import 'package:tv/app/domain/repositories/account_repository.dart';
 import 'package:tv/app/domain/repositories/authentication_repository.dart';
 import 'package:tv/app/domain/repositories/connectivity_repository.dart';
+import 'package:tv/app/domain/repositories/movies_repository.dart';
 import 'package:tv/app/domain/repositories/preferences_repository.dart';
 import 'package:tv/app/domain/repositories/trending_repository.dart';
 import 'package:tv/app/presentation/service_locator/service_locator.dart';
@@ -37,5 +38,9 @@ void injectTestRepositories({
 
   ServiceLocator.instance.put<TrendingRepository>(
     MockTrendingRepository(),
+  );
+
+  ServiceLocator.instance.put<MoviesRepository>(
+    MockMoviesRepository(),
   );
 }

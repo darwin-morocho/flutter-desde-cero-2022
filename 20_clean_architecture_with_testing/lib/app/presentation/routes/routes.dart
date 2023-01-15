@@ -1,5 +1,5 @@
 class Routes {
-  Routes._();
+  Routes._(); // coverage:ignore-line
 
   static const splash = '/splash';
   static const signIn = '/sign-in';

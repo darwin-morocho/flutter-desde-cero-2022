@@ -5,14 +5,14 @@ import '../../typedefs.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
-@freezed
+@Freezed(toJson: false)
 class User with _$User {
   const factory User({
     required int id,
     required String username,
 
     ///
-    @JsonKey( 
+    @JsonKey(
       name: 'avatar',
       fromJson: avatarPathFromJson,
     )

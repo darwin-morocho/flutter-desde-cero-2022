@@ -1,8 +1,8 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../domain/models/media/media.dart';
 import '../../../../global/utils/get_image_url.dart';
+import '../../../../global/widgets/network_image.dart';
 import '../../../../utils/go_to_media_details.dart';
 
 class FavoritesList extends StatefulWidget {
@@ -23,12 +23,13 @@ class _FavoritesListState extends State<FavoritesList>
         final item = widget.items[index];
 
         return MaterialButton(
+          key: Key('${item.type.name}-${item.id}'),
           onPressed: () => goToMediaDetails(context, item),
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              ExtendedImage.network(
-                getImageUrl(
+              MyNetworkImage(
+                url: getImageUrl(
                   item.posterPath,
                 ),
                 width: 60,

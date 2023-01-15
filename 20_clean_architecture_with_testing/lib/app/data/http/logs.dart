@@ -8,6 +8,7 @@ void _printLogs(
   StackTrace? stackTrace,
 ) {
   if (kDebugMode) {
+    // coverage:ignore-start
     if (Platform.environment.containsKey('FLUTTER_TEST') &&
         logs.containsKey('exception') &&
         showHttpErrors) {
@@ -16,6 +17,7 @@ void _printLogs(
       );
       print(stackTrace);
     }
+    // coverage:ignore-end
     log(
       '''
 🔥

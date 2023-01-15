@@ -7,7 +7,7 @@ import '../media/media.dart';
 part 'movie.freezed.dart';
 part 'movie.g.dart';
 
-@freezed
+@Freezed(toJson: false)
 class Movie with _$Movie {
   const factory Movie({
     required int id,
